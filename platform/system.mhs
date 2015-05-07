@@ -1,0 +1,174 @@
+
+# ##############################################################################
+# Created by Base System Builder Wizard for Xilinx EDK 14.7 Build EDK_P.20131013
+# Tue May 05 15:26:11 2015
+# Target Board:  digilent atlys Rev C
+# Family:    spartan6
+# Device:    xc6slx45
+# Package:   csg324
+# Speed Grade:  -3
+# ##############################################################################
+ PARAMETER VERSION = 2.1.0
+
+
+ PORT RESET = RESET, DIR = I, SIGIS = RST, RST_POLARITY = 0
+ PORT GCLK = GCLK, DIR = I, SIGIS = CLK, CLK_FREQ = 100000000
+ PORT axi_uartlite_0_RX_pin = axi_uartlite_0_RX, DIR = I
+ PORT axi_uartlite_0_TX_pin = axi_uartlite_0_TX, DIR = O
+ PORT vid_inout_per_0_TMDS_pin = vid_inout_per_0_TMDS, DIR = O, VEC = [3:0]
+ PORT vid_inout_per_0_TMDSB_pin = vid_inout_per_0_TMDSB, DIR = O, VEC = [3:0]
+ PORT vid_inout_per_0_hdmi_clk_p_pin = vid_inout_per_0_hdmi_clk_p, DIR = I
+ PORT vid_inout_per_0_hdmi_c0_n_pin = vid_inout_per_0_hdmi_c0_n, DIR = I
+ PORT vid_inout_per_0_hdmi_c1_p_pin = vid_inout_per_0_hdmi_c1_p, DIR = I
+ PORT vid_inout_per_0_hdmi_c0_p_pin = vid_inout_per_0_hdmi_c0_p, DIR = I
+ PORT vid_inout_per_0_hdmi_c1_n_pin = vid_inout_per_0_hdmi_c1_n, DIR = I
+ PORT vid_inout_per_0_hdmi_c2_p_pin = vid_inout_per_0_hdmi_c2_p, DIR = I
+ PORT vid_inout_per_0_hdmi_c2_n_pin = vid_inout_per_0_hdmi_c2_n, DIR = I
+ PORT vid_inout_per_0_hdmi_sclk_pin = vid_inout_per_0_hdmi_sclk, DIR = I
+ PORT vid_inout_per_0_hdmi_sdat_pin = vid_inout_per_0_hdmi_sdat, DIR = I
+ PORT vid_inout_per_0_hdmi_clk_n_pin = vid_inout_per_0_hdmi_clk_n, DIR = I
+ PORT vid_inout_per_0_switch_pin = vid_inout_per_0_switch, DIR = I
+
+
+BEGIN proc_sys_reset
+ PARAMETER INSTANCE = proc_sys_reset_0
+ PARAMETER HW_VER = 3.00.a
+ PARAMETER C_EXT_RESET_HIGH = 0
+ PORT MB_Debug_Sys_Rst = proc_sys_reset_0_MB_Debug_Sys_Rst
+ PORT Dcm_locked = proc_sys_reset_0_Dcm_locked
+ PORT MB_Reset = proc_sys_reset_0_MB_Reset
+ PORT Slowest_sync_clk = clk_100_0000MHz
+ PORT Interconnect_aresetn = proc_sys_reset_0_Interconnect_aresetn
+ PORT Ext_Reset_In = RESET
+ PORT BUS_STRUCT_RESET = proc_sys_reset_0_BUS_STRUCT_RESET
+END
+
+BEGIN lmb_v10
+ PARAMETER INSTANCE = microblaze_0_ilmb
+ PARAMETER HW_VER = 2.00.b
+ PORT SYS_RST = proc_sys_reset_0_BUS_STRUCT_RESET
+ PORT LMB_CLK = clk_100_0000MHz
+END
+
+BEGIN lmb_bram_if_cntlr
+ PARAMETER INSTANCE = microblaze_0_i_bram_ctrl
+ PARAMETER HW_VER = 3.10.c
+ PARAMETER C_BASEADDR = 0x00000000
+ PARAMETER C_HIGHADDR = 0x0000FFFF
+ BUS_INTERFACE SLMB = microblaze_0_ilmb
+ BUS_INTERFACE BRAM_PORT = microblaze_0_i_bram_ctrl_2_microblaze_0_bram_block
+END
+
+BEGIN lmb_v10
+ PARAMETER INSTANCE = microblaze_0_dlmb
+ PARAMETER HW_VER = 2.00.b
+ PORT SYS_RST = proc_sys_reset_0_BUS_STRUCT_RESET
+ PORT LMB_CLK = clk_100_0000MHz
+END
+
+BEGIN lmb_bram_if_cntlr
+ PARAMETER INSTANCE = microblaze_0_d_bram_ctrl
+ PARAMETER HW_VER = 3.10.c
+ PARAMETER C_BASEADDR = 0x00000000
+ PARAMETER C_HIGHADDR = 0x0000FFFF
+ BUS_INTERFACE SLMB = microblaze_0_dlmb
+ BUS_INTERFACE BRAM_PORT = microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block
+END
+
+BEGIN bram_block
+ PARAMETER INSTANCE = microblaze_0_bram_block
+ PARAMETER HW_VER = 1.00.a
+ BUS_INTERFACE PORTA = microblaze_0_i_bram_ctrl_2_microblaze_0_bram_block
+ BUS_INTERFACE PORTB = microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block
+END
+
+BEGIN microblaze
+ PARAMETER INSTANCE = microblaze_0
+ PARAMETER HW_VER = 8.50.c
+ PARAMETER C_INTERCONNECT = 2
+ PARAMETER C_USE_BARREL = 1
+ PARAMETER C_USE_FPU = 0
+ PARAMETER C_DEBUG_ENABLED = 1
+ PARAMETER C_ICACHE_BASEADDR = 0X00000000
+ PARAMETER C_ICACHE_HIGHADDR = 0X3FFFFFFF
+ PARAMETER C_USE_ICACHE = 0
+ PARAMETER C_ICACHE_ALWAYS_USED = 0
+ PARAMETER C_DCACHE_BASEADDR = 0X00000000
+ PARAMETER C_DCACHE_HIGHADDR = 0X3FFFFFFF
+ PARAMETER C_USE_DCACHE = 0
+ PARAMETER C_DCACHE_ALWAYS_USED = 0
+ BUS_INTERFACE ILMB = microblaze_0_ilmb
+ BUS_INTERFACE DLMB = microblaze_0_dlmb
+ BUS_INTERFACE M_AXI_DP = axi4lite_0
+ BUS_INTERFACE DEBUG = microblaze_0_debug
+ PORT MB_RESET = proc_sys_reset_0_MB_Reset
+ PORT CLK = clk_100_0000MHz
+END
+
+BEGIN mdm
+ PARAMETER INSTANCE = debug_module
+ PARAMETER HW_VER = 2.10.a
+ PARAMETER C_INTERCONNECT = 2
+ PARAMETER C_USE_UART = 1
+ PARAMETER C_BASEADDR = 0x41400000
+ PARAMETER C_HIGHADDR = 0x4140ffff
+ BUS_INTERFACE S_AXI = axi4lite_0
+ BUS_INTERFACE MBDEBUG_0 = microblaze_0_debug
+ PORT Debug_SYS_Rst = proc_sys_reset_0_MB_Debug_Sys_Rst
+ PORT S_AXI_ACLK = clk_100_0000MHz
+END
+
+BEGIN clock_generator
+ PARAMETER INSTANCE = clock_generator_0
+ PARAMETER HW_VER = 4.03.a
+ PARAMETER C_EXT_RESET_HIGH = 0
+ PARAMETER C_CLKIN_FREQ = 100000000
+ PARAMETER C_CLKOUT0_FREQ = 100000000
+ PARAMETER C_CLKOUT0_GROUP = NONE
+ PORT LOCKED = proc_sys_reset_0_Dcm_locked
+ PORT CLKOUT0 = clk_100_0000MHz
+ PORT RST = RESET
+ PORT CLKIN = GCLK
+END
+
+BEGIN axi_interconnect
+ PARAMETER INSTANCE = axi4lite_0
+ PARAMETER HW_VER = 1.06.a
+ PARAMETER C_INTERCONNECT_CONNECTIVITY_MODE = 0
+ PORT interconnect_aclk = clk_100_0000MHz
+ PORT INTERCONNECT_ARESETN = proc_sys_reset_0_Interconnect_aresetn
+END
+
+BEGIN axi_uartlite
+ PARAMETER INSTANCE = axi_uartlite_0
+ PARAMETER HW_VER = 1.02.a
+ PARAMETER C_BASEADDR = 0x84000000
+ PARAMETER C_HIGHADDR = 0x8400ffff
+ BUS_INTERFACE S_AXI = axi4lite_0
+ PORT S_AXI_ACLK = clk_100_0000MHz
+ PORT RX = axi_uartlite_0_RX
+ PORT TX = axi_uartlite_0_TX
+END
+
+BEGIN vid_inout_per
+ PARAMETER INSTANCE = vid_inout_per_0
+ PARAMETER HW_VER = 1.01.a
+ PARAMETER C_BASEADDR = 0x83000000
+ PARAMETER C_HIGHADDR = 0x8300FFFF
+ BUS_INTERFACE S_AXI = axi4lite_0
+ PORT S_AXI_ACLK = clk_100_0000MHz
+ PORT TMDS = vid_inout_per_0_TMDS
+ PORT TMDSB = vid_inout_per_0_TMDSB
+ PORT hdmi_clk_p = vid_inout_per_0_hdmi_clk_p
+ PORT hdmi_c0_n = vid_inout_per_0_hdmi_c0_n
+ PORT hdmi_c1_p = vid_inout_per_0_hdmi_c1_p
+ PORT hdmi_c0_p = vid_inout_per_0_hdmi_c0_p
+ PORT hdmi_c1_n = vid_inout_per_0_hdmi_c1_n
+ PORT hdmi_c2_p = vid_inout_per_0_hdmi_c2_p
+ PORT hdmi_c2_n = vid_inout_per_0_hdmi_c2_n
+ PORT hdmi_sclk = vid_inout_per_0_hdmi_sclk
+ PORT hdmi_sdat = vid_inout_per_0_hdmi_sdat
+ PORT hdmi_clk_n = vid_inout_per_0_hdmi_clk_n
+ PORT switch = vid_inout_per_0_switch
+END
+

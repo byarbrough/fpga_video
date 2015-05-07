@@ -1,0 +1,38 @@
+#
+# pin constraints
+#
+NET GCLK LOC = "L15"  |  IOSTANDARD = "LVCMOS33";
+NET RESET LOC = "T15"  |  IOSTANDARD = "LVCMOS33"  |  TIG;
+#
+# additional constraints
+#
+
+NET "GCLK" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 100000 kHz;
+
+# user
+VCCAUX = 3.3;
+
+# HDMI output
+NET "vid_inout_per_0_TMDS_pin(0)"	LOC = "D8" | IOSTANDARD = TMDS_33 ; # Blue
+NET "vid_inout_per_0_TMDSB_pin(0)"	LOC = "C8" | IOSTANDARD = TMDS_33 ;
+NET "vid_inout_per_0_TMDS_pin(1)"	LOC = "C7" | IOSTANDARD = TMDS_33 ; # Red
+NET "vid_inout_per_0_TMDSB_pin(1)"	LOC = "A7" | IOSTANDARD = TMDS_33 ;
+NET "vid_inout_per_0_TMDS_pin(2)"	LOC = "B8" | IOSTANDARD = TMDS_33 ; # Green
+NET "vid_inout_per_0_TMDSB_pin(2)"	LOC = "A8" | IOSTANDARD = TMDS_33 ;
+NET "vid_inout_per_0_TMDS_pin(3)"	LOC = "B6" | IOSTANDARD = TMDS_33 ; # Clock
+NET "vid_inout_per_0_TMDSB_pin(3)"	LOC = "A6" | IOSTANDARD = TMDS_33 ;
+
+# HDMI input
+NET vid_inout_per_0_hdmi_clk_p_pin	LOC = H17;
+NET vid_inout_per_0_hdmi_clk_n_pin	LOC = H18;
+NET vid_inout_per_0_hdmi_c0_p_pin		LOC = K17;
+NET vid_inout_per_0_hdmi_c0_n_pin		LOC = K18;
+NET vid_inout_per_0_hdmi_c1_p_pin		LOC = L17;
+NET vid_inout_per_0_hdmi_c1_n_pin		LOC = L18;
+NET vid_inout_per_0_hdmi_c2_p_pin		LOC = J16;
+NET vid_inout_per_0_hdmi_c2_n_pin		LOC = J18;
+NET vid_inout_per_0_hdmi_sclk_pin		LOC = M16;
+NET vid_inout_per_0_hdmi_sdat_pin		LOC = M18;
+
+NET vid_inout_per_0_switch_pin	LOC = E4;

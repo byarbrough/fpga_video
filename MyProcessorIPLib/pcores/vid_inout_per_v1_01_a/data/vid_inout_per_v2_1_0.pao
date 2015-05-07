@@ -1,0 +1,21 @@
+##############################################################################
+## Filename:          C:/Users/C16Brian.Yarbrough/Documents/Academics/2dg/ECE_383/FinalProject/MyProcessorIPLib/pcores/vid_inout_per_v1_01_a/data/vid_inout_per_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Tue May 05 22:26:18 2015 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib vid_inout_per_v1_01_a dviPass_pack.vhd
+lib vid_inout_per_v1_01_a input_serialiser.vhd
+lib vid_inout_per_v1_01_a gearbox.vhd
+lib vid_inout_per_v1_01_a tdms_decode.vhd
+lib vid_inout_per_v1_01_a input_channel.vhd
+lib vid_inout_per_v1_01_a dvi_in.vhd
+lib vid_inout_per_v1_01_a tdms.vhd
+lib vid_inout_per_v1_01_a dvid.vhd
+lib vid_inout_per_v1_01_a scopeFace.vhd
+lib vid_inout_per_v1_01_a vga.vhd
+lib vid_inout_per_v1_01_a video.vhd
+lib vid_inout_per_v1_01_a user_logic.vhd
+lib vid_inout_per_v1_01_a vid_inout_per.vhd
