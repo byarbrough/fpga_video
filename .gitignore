@@ -32,7 +32,10 @@
 
 !Data/
 
-
+!Source/
+!Source/*.vhd
+!Source/*.ucf
+!Source/*.bit
 
 # Et cetera.  Be sure to list all the file types you may want to use.  
 
